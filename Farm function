@@ -1,0 +1,54 @@
+local tweenService = game:GetService("TweenService")
+local player = game.Players.LocalPlayer
+
+local autofarm = false
+
+local function autofarmstart()
+    local tweenInfo = TweenInfo.new(1, Enum.EasingStyle.Linear)
+    local tweenInfoE = TweenInfo.new(2, Enum.EasingStyle.Linear)
+    local AutofarmInfoS = TweenInfo.new(24, Enum.EasingStyle.Linear)
+
+    if not player.Character then return end
+    local humanoidRootPart = player.Character:WaitForChild("HumanoidRootPart")
+
+    local Tween = tweenService:Create(humanoidRootPart, tweenInfo, {CFrame = CFrame.new(-53.3258858, 61.0841904, -168.990448)})
+    Tween:Play()
+    Tween.Completed:Wait()
+
+    local TweenS = tweenService:Create(humanoidRootPart, AutofarmInfoS, {CFrame = CFrame.new(-60.1640434, 45.5146027, 8749.81738)})
+    TweenS:Play()
+    TweenS.Completed:Wait()
+
+    local TweenE = tweenService:Create(humanoidRootPart, tweenInfoE, {CFrame = CFrame.new(-54.7364044, -353.343506, 9499.69141)})
+    TweenE:Play()
+end
+
+
+
+-- Teleport Farm
+local function autofarmstartTP()
+    local character = player.Character or player.CharacterAdded:Wait()
+    character:WaitForChild("HumanoidRootPart")
+
+    local teleportPositions = {
+        Vector3.new(-51.5656433, 65.0000458, 1369.09009),
+        Vector3.new(-51.5656433, 65.0000458, 2139.09009),
+        Vector3.new(-51.5656433, 65.0000458, 2909.09009),
+        Vector3.new(-51.5656433, 65.0000458, 3679.09009),
+        Vector3.new(-53.5669785, 72.6005325, 4448.14209),
+        Vector3.new(-53.5660019, 70.8500137, 5217.94238),
+        Vector3.new(-51.5656433, 65.0000458, 5989.08984),
+        Vector3.new(-51.5656433, 65.0000458, 6759.08984),
+        Vector3.new(-51.5656433, 65.0000458, 7529.08984),
+        Vector3.new(-51.5656433, 65.0000458, 8299.08984),
+        Vector3.new(-55.7065125, -358.739624, 9492.35645)
+    }
+
+    for _, position in ipairs(teleportPositions) do
+        if not autofarm then break end
+        if character and character.PrimaryPart then
+            character:PivotTo(CFrame.new(position))
+            task.wait(2)
+        end
+    end
+end
